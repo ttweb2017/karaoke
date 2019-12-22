@@ -1,5 +1,6 @@
 package com.hazaryorite.karaoke.service;
 
+import com.hazaryorite.karaoke.domain.Singer;
 import com.hazaryorite.karaoke.domain.Video;
 import com.hazaryorite.karaoke.repos.VideoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,14 @@ public class VideoService {
 
     public void save(Video video){
         videoRepo.save(video);
+    }
+
+    public List<Video> findAllBySinger(Singer singer){
+        return videoRepo.findAllBySinger(singer);
+    }
+
+    public void delete(Video video) {
+        videoRepo.delete(video);
     }
 
     public void saveFile(Video video, List<MultipartFile> videoFile) throws IOException {

@@ -14,6 +14,14 @@
                 </div>
             </div>
             <div class="card-body">
+                <#if type??>
+                    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                        <strong><#if type == "danger">Error<#else> Success</#if>!</strong> <br>${message}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </#if>
                 <!-- Modal -->
                 <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">

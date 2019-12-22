@@ -40,6 +40,10 @@ public class SingerService {
         return singer;
     }
 
+    public void delete(Singer singer){
+        singerRepo.delete(singer);
+    }
+
     public void saveFile(Singer singer, MultipartFile uploadFile) throws IOException {
         if (uploadFile != null && !uploadFile.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);

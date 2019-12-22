@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -69,6 +72,24 @@ public class AdminVideoController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return "redirect:/admin/videos";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/delete-video/{video}")
+    public String deleteVideo(@PathVariable Video video, RedirectAttributes redirectAttributes){
+        if(video == null){
+            redirectAttributes.addFlashAttribute("type", "error");
+            redirectAttributes.addFlashAttribute("message", "There is not such a Video, sorry!");
+
+            return "redirect:/admin/videos";
+        }
+
+        videoService.delete(video);
+
+        redirectAttributes.addFlashAttribute("type", "success");
+        redirectAttributes.addFlashAttribute("message", "Video has been removed successfully!");
 
         return "redirect:/admin/videos";
     }

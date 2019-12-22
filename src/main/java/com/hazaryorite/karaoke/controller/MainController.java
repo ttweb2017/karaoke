@@ -11,4 +11,9 @@ public class MainController {
 
         return "front/main";
     }
+
+    @GetMapping("/error")
+    public String error(){
+        return "error";
+    }
 }
