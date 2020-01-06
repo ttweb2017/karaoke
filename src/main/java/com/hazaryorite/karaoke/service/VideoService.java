@@ -74,10 +74,13 @@ public class VideoService {
 
                 file.transferTo(new File(uploadPath + "/" + VideoService.VIDEO_PATH + "/" + resultFilename));
 
-                if(Objects.requireNonNull(file.getOriginalFilename()).endsWith(".mp4")){
-                    video.setVideo(resultFilename);
-                }else{
+                if(Objects.requireNonNull(file.getOriginalFilename()).endsWith(".png")
+                        || Objects.requireNonNull(file.getOriginalFilename()).endsWith(".jpeg")
+                        || Objects.requireNonNull(file.getOriginalFilename()).endsWith(".JPEG")
+                        || Objects.requireNonNull(file.getOriginalFilename()).endsWith(".jpg")){
                     video.setImage(resultFilename);
+                }else{
+                    video.setVideo(resultFilename);
                 }
             }
         }
