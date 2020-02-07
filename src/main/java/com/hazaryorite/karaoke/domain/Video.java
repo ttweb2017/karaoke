@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Video {
@@ -34,7 +36,17 @@ public class Video {
     @JsonView(Views.FullProfile.class)
     private int watchedCounter = 0;
 
+    @JsonView(Views.FullProfile.class)
+    private LocalDateTime addedDateTime;
+
     private boolean active;
+
+    public String getFormattedDate(){
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+
+        return addedDateTime.format(dateFormat);
+    }
 
     public Long getId() {
         return id;
@@ -92,6 +104,14 @@ public class Video {
         this.watchedCounter = watchedCounter;
     }
 
+    public LocalDateTime getAddedDateTime() {
+        return addedDateTime;
+    }
+
+    public void setAddedDateTime(LocalDateTime addedDateTime) {
+        this.addedDateTime = addedDateTime;
+    }
+
     @Override
     public String toString() {
         return "Video{" +
@@ -101,6 +121,7 @@ public class Video {
                 ", video='" + video + '\'' +
                 ", image='" + image + '\'' +
                 ", watchedCounter=" + watchedCounter +
+                ", addedDateTime=" + addedDateTime +
                 ", active=" + active +
                 '}';
     }

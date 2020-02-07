@@ -94,12 +94,12 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </li>
-                    <li class="nav-item dropdown hidden-caret">
+                    <!--li class="nav-item dropdown hidden-caret">
                         <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-envelope"></i>
                         </a>
-                        <!--ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
+                        <ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
                             <li>
                                 <div class="dropdown-title d-flex justify-content-between align-items-center">
                                     Messages
@@ -164,15 +164,15 @@
                                 <a class="see-all" href="javascript:void(0);">See all messages<i
                                         class="fa fa-angle-right"></i> </a>
                             </li>
-                        </ul-->
-                    </li>
-                    <li class="nav-item dropdown hidden-caret">
+                        </ul>
+                    </li-->
+                    <!--li class="nav-item dropdown hidden-caret">
                         <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell"></i>
                             <span class="notification">0</span>
                         </a>
-                        <!--ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
+                        <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
                             <li>
                                 <div class="dropdown-title">You have 4 new notification</div>
                             </li>
@@ -222,8 +222,8 @@
                                 <a class="see-all" href="javascript:void(0);">See all notifications<i
                                         class="fa fa-angle-right"></i> </a>
                             </li>
-                        </ul-->
-                    </li>
+                        </ul>
+                    </li-->
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
@@ -323,32 +323,17 @@
                         </a>
                     </li>
                     <#if isAdmin || isModerator>
-                        <li class="nav-section">
-							<span class="sidebar-mini-icon">
-								<i class="fa fa-ellipsis-h"></i>
-							</span>
-                            <h4 class="text-section">Components</h4>
+                        <li class="nav-item">
+                            <a href="/admin/singers">
+                                <i class="fas fa-microphone"></i>
+                                <p>Singers</p>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a data-toggle="collapse" href="#base">
-                                <i class="fas fa-layer-group"></i>
-                                <p>Base</p>
-                                <span class="caret"></span>
+                            <a href="/admin/videos">
+                                <i class="fas fa-video"></i>
+                                <p>Videos</p>
                             </a>
-                            <div class="collapse" id="base">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="/admin/singers">
-                                            <span class="sub-item">Singers</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin/videos">
-                                            <span class="sub-item">Videos</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                     </#if>
                     <#if isAdmin>

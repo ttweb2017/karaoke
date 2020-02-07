@@ -47,6 +47,12 @@ public class VideoController {
         return videoService.findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(true);
     }
 
+    @JsonView(Views.FullProfile.class)
+    @GetMapping("/top20-videos")
+    public List<Video> top20Videos(){
+        return videoService.findTop20ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(true);
+    }
+
     @GetMapping("/update-watch-count/{video}")
     public void updateWatchCount(@PathVariable Video video){
         if(video != null){

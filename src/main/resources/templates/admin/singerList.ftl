@@ -109,9 +109,9 @@
                                 </td>
                                 <td>
                                     <#if singer.active>
-                                        <p class="badge-success">Active</p>
+                                        <i class="badge-success" style="display: block;width: 24px;height: 24px;margin: 0 auto;"></i>
                                     <#else>
-                                        <p class="badge-danger">Not Active</p>
+                                        <i class="badge-danger" style="display: block;width: 24px;height: 24px;margin: 0 auto;"></i>
                                     </#if>
                                 </td>
                                 <td>

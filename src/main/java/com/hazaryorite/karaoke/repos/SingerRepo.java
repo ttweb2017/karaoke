@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface SingerRepo extends JpaRepository<Singer, Long> {
     List<Singer> findAllByActive(boolean active);
+
+    List<Singer> findAllByActiveOrderByFirstNameAsc(boolean active);
 }

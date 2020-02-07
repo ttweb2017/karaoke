@@ -95,7 +95,9 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Image</th>
+                            <th>Viewed</th>
                             <th>Status</th>
+                            <th>Added Date</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                         </thead>
@@ -104,25 +106,38 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Image</th>
+                            <th>Viewed</th>
                             <th>Status</th>
+                            <th>Added Date</th>
                             <th>Action</th>
                         </tr>
                         </tfoot>
                         <tbody>
+                        <#assign size = videos?size />
                             <#list videos as video>
                             <tr>
-                                <td>${video.id}</td>
+                                <td>${video?counter}</td>
                                 <td>${video.name}</td>
                                 <td>
-                                    <img class="img-fluid" width="64" height="64" src="/img/videos/${video.image}"
-                                         alt="${video.name}" />
+                                    <#if video.image??>
+                                        <img class="img-fluid" width="32" height="32" src="/img/videos/${video.image}"
+                                             alt="${video.name}" />
+                                    <#else>
+                                        image
+                                    </#if>
+                                </td>
+                                <td>
+                                    ${video.watchedCounter}
                                 </td>
                                 <td>
                                     <#if video.active>
-                                        <p class="badge-success">Active</p>
+                                        <i class="badge-success" style="display: block;width: 24px;height: 24px;margin: 0 auto;"></i>
                                     <#else>
-                                        <p class="badge-danger">Not Active</p>
+                                        <i class="badge-danger" style="display: block;width: 24px;height: 24px;margin: 0 auto;"></i>
                                     </#if>
+                                </td>
+                                <td>
+                                    ${video.formattedDate}
                                 </td>
                                 <td>
                                     <div class="form-button-action">
@@ -202,16 +217,18 @@
 
                         var status = "";
                         if(json.active){
-                            status = '<p class="badge-success">Active</p>';
+                            status = '<i class="badge-success" style="display: block;width: 24px;height: 24px;margin: 0 auto;"></i>';
                         }else{
-                            status = '<p class="badge-danger">Not Active</p>';
+                            status = '<i class="badge-danger" style="display: block;width: 24px;height: 24px;margin: 0 auto;"></i>';
                         }
 
                         $('#dataList').dataTable().fnAddData([
-                            json.id,
+                            ${size + 1},
                             json.name,
                             json.image,
+                            json.watchedCounter,
                             status,
+                            json.formattedDate,
                             action
                         ]);
                     });

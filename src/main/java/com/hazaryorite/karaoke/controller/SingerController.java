@@ -29,7 +29,7 @@ public class SingerController {
     @JsonView(Views.FullProfile.class)
     @GetMapping
     public List<Singer> singers(){
-        return singerService.findAllByActive(true);
+        return singerService.findAllByActiveOrderByFirstNameAsc(true);
     }
 
     @JsonView(Views.FullProfile.class)

@@ -17,7 +17,9 @@ public interface VideoRepo extends JpaRepository<Video, Long> {
 
     List<Video> findAllBySingerAndVideoIsNotNull(Singer singer);
 
+    List<Video> findTop5ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active);
+
     List<Video> findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active);
 
-    List<Video> findTop5ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active);
+    List<Video> findTop20ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active);
 }

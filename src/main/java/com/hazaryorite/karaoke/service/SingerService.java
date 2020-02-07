@@ -34,6 +34,10 @@ public class SingerService {
         return singerRepo.findAllByActive(active);
     }
 
+    public List<Singer> findAllByActiveOrderByFirstNameAsc(boolean active){
+        return singerRepo.findAllByActiveOrderByFirstNameAsc(active);
+    }
+
     public Singer save(Singer singer) {
         singerRepo.save(singer);
 

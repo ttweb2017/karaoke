@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -48,7 +49,12 @@ public class VideoService {
         return videoRepo.findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(active);
     }
 
+    public List<Video> findTop20ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active){
+        return videoRepo.findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(active);
+    }
+
     public void save(Video video){
+        video.setAddedDateTime(LocalDateTime.now());
         videoRepo.save(video);
     }
 
