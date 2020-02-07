@@ -11,5 +11,13 @@ import java.util.List;
 public interface VideoRepo extends JpaRepository<Video, Long> {
     List<Video> findAllByActive(boolean active);
 
+    List<Video> findAllByActiveAndVideoIsNotNull(boolean active);
+
     List<Video> findAllBySinger(Singer singer);
+
+    List<Video> findAllBySingerAndVideoIsNotNull(Singer singer);
+
+    List<Video> findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active);
+
+    List<Video> findTop5ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active);
 }

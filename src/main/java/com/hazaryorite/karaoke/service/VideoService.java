@@ -36,12 +36,28 @@ public class VideoService {
         return videoRepo.findAllByActive(active);
     }
 
+    public List<Video> findAllByActiveAndVideoIsNotNull(boolean active){
+        return videoRepo.findAllByActiveAndVideoIsNotNull(active);
+    }
+
+    public List<Video> findTop5ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active){
+        return videoRepo.findTop5ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(active);
+    }
+
+    public List<Video> findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(boolean active){
+        return videoRepo.findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(active);
+    }
+
     public void save(Video video){
         videoRepo.save(video);
     }
 
     public List<Video> findAllBySinger(Singer singer){
         return videoRepo.findAllBySinger(singer);
+    }
+
+    public List<Video> findAllBySingerAndVideoIsNotNull(Singer singer){
+        return videoRepo.findAllBySingerAndVideoIsNotNull(singer);
     }
 
     public void delete(Video video) {

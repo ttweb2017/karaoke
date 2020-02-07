@@ -24,11 +24,6 @@ import static org.springframework.http.HttpStatus.PARTIAL_CONTENT;
 public class VideoController {
     private final VideoService videoService;
 
-    @Value("${upload.path}")
-    private String uploadPath;
-
-    private final Long CHUNK_SIZE = 100000L;
-
     @Autowired
     public VideoController(VideoService videoService) {
         this.videoService = videoService;
@@ -37,52 +32,26 @@ public class VideoController {
     @JsonView(Views.FullProfile.class)
     @GetMapping("/videos")
     public List<Video> videos(){
-        return videoService.findAllByActive(true);
+        return videoService.findAllByActiveAndVideoIsNotNull(true);
     }
 
-    @GetMapping("/full-video/{name}")
-    public ResponseEntity<UrlResource> getFullVideo(@PathVariable String name) throws MalformedURLException {
-
-        String videoPath = uploadPath + "/" + VideoService.VIDEO_PATH + "/";
-        File videoFilePath = new File(videoPath + name);
-
-        UrlResource video = new UrlResource("file:///" + videoFilePath.getPath());
-
-        return ResponseEntity.status(PARTIAL_CONTENT)
-                .contentType(MediaTypeFactory.getMediaType(video)
-                        .orElse(MediaType.APPLICATION_OCTET_STREAM))
-                .body(video);
+    @JsonView(Views.FullProfile.class)
+    @GetMapping("/top5-videos")
+    public List<Video> top5Videos(){
+        return videoService.findTop5ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(true);
     }
 
-    @GetMapping("/video/{name}")
-    public ResponseEntity<ResourceRegion> getVideo(
-            @PathVariable String name,
-            @RequestHeader HttpHeaders headers) throws IOException {
-
-        String videoPath = uploadPath + "/" + VideoService.VIDEO_PATH + "/";
-        UrlResource video = new UrlResource("file:///" + videoPath + name);
-        ResourceRegion region = resourceRegion(video, headers);
-
-        return ResponseEntity.status(PARTIAL_CONTENT)
-                .contentType(MediaTypeFactory.getMediaType(video).orElse(MediaType.APPLICATION_OCTET_STREAM))
-                .body(region);
+    @JsonView(Views.FullProfile.class)
+    @GetMapping("/top10-videos")
+    public List<Video> top10Videos(){
+        return videoService.findTop10ByActiveAndVideoIsNotNullOrderByWatchedCounterDesc(true);
     }
 
-    private ResourceRegion resourceRegion(UrlResource video, HttpHeaders headers) throws IOException {
-        Long contentLength = video.contentLength();
-        HttpRange range = headers.getRange()
-                .stream()
-                .findFirst()
-                .orElse(null);
-
-        if (range != null) {
-            long start = range.getRangeStart(contentLength);
-            Long end = range.getRangeEnd(contentLength);
-            long rangeLength = min(CHUNK_SIZE, end - start + 1);
-            return new ResourceRegion(video, start, rangeLength);
-        } else {
-            long rangeLength = min(CHUNK_SIZE, contentLength);
-            return new ResourceRegion(video, 0, rangeLength);
+    @GetMapping("/update-watch-count/{video}")
+    public void updateWatchCount(@PathVariable Video video){
+        if(video != null){
+            video.setWatchedCounter(video.getWatchedCounter() + 1);
+            videoService.save(video);
         }
     }
 }

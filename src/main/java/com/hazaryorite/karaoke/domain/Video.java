@@ -31,6 +31,9 @@ public class Video {
     @Length(max = 255, message = "Image can't be more than 255 chars")
     private String image;
 
+    @JsonView(Views.FullProfile.class)
+    private int watchedCounter = 0;
+
     private boolean active;
 
     public Long getId() {
@@ -79,5 +82,26 @@ public class Video {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getWatchedCounter() {
+        return watchedCounter;
+    }
+
+    public void setWatchedCounter(int watchedCounter) {
+        this.watchedCounter = watchedCounter;
+    }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", singer=" + singer +
+                ", video='" + video + '\'' +
+                ", image='" + image + '\'' +
+                ", watchedCounter=" + watchedCounter +
+                ", active=" + active +
+                '}';
     }
 }
